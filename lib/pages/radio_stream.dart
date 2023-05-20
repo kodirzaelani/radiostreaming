@@ -43,9 +43,14 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.green,
+        centerTitle: true,
         title: const Text(
           'Radio Islamic Center Kaltim',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Center(
@@ -96,6 +101,8 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
                 isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
               ),
             ),
+            const SizedBox(height: 30),
+            const Text('Version. 1.0'),
           ],
         ),
       ),
