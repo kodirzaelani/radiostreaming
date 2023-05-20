@@ -45,7 +45,7 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text(
-          'Radio Streaming',
+          'Radio Islamic Center Kaltim',
         ),
       ),
       body: Center(
@@ -76,7 +76,7 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
             ),
             const SizedBox(height: 20),
             Text(
-              metadata?[0] ?? 'Radio Islamic Center Kaltim',
+              metadata?[0] ?? 'Radio Streaming',
               softWrap: false,
               overflow: TextOverflow.fade,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
@@ -87,17 +87,16 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
               overflow: TextOverflow.fade,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                isPlaying ? _radioPlayer.pause() : _radioPlayer.play();
+              },
+              child: Icon(
+                isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+              ),
+            ),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          isPlaying ? _radioPlayer.pause() : _radioPlayer.play();
-        },
-        tooltip: 'Control button',
-        child: Icon(
-          isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
         ),
       ),
     );
