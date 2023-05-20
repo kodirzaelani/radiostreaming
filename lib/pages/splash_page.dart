@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../theme.dart';
-
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -28,7 +26,19 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor1,
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        centerTitle: true,
+        // menonaktfikan tombol back
+        automaticallyImplyLeading: false,
+        title: const Text(
+          'Radio Islamic Center Kaltim',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +58,6 @@ class _SplashPageState extends State<SplashPage> {
             const Text(
               'Loading...',
               style: TextStyle(
-                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),

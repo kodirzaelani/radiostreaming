@@ -23,7 +23,7 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
     _radioPlayer.setChannel(
       title: 'Radio Player',
       url: 'https://audiostreamserver.indonesiastreaming.com/islamic_center',
-      imagePath: "assets/cover.png",
+      imagePath: "assets/_vradio.png",
     );
 
     _radioPlayer.stateStream.listen((value) {
@@ -41,10 +41,92 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget header() {
+      return Container(
+        margin: const EdgeInsets.only(top: 150),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Radio Streaming',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget content() {
+      return Column(
+        children: [
+          FutureBuilder(
+            future: _radioPlayer.getArtworkImage(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              Image artwork;
+              if (snapshot.hasData) {
+                artwork = snapshot.data;
+              } else {
+                artwork = Image.asset(
+                  "assets/_vradio.png",
+                  fit: BoxFit.cover,
+                );
+              }
+              return SizedBox(
+                height: 180,
+                width: 250,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: artwork,
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    }
+
+    Widget buttonRadioPlay() {
+      return Container(
+        margin: const EdgeInsets.only(bottom: 30),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                isPlaying ? _radioPlayer.pause() : _radioPlayer.play();
+              },
+              child: Icon(
+                isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget footer() {
+      return Container(
+        margin: const EdgeInsets.only(bottom: 30),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Version 1.0',
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         centerTitle: true,
+        // menonaktfikan tombol back
+        automaticallyImplyLeading: false,
         title: const Text(
           'Radio Islamic Center Kaltim',
           style: TextStyle(
@@ -56,53 +138,16 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FutureBuilder(
-              future: _radioPlayer.getArtworkImage(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                Image artwork;
-                if (snapshot.hasData) {
-                  artwork = snapshot.data;
-                } else {
-                  artwork = Image.asset(
-                    "assets/cover.png",
-                    fit: BoxFit.cover,
-                  );
-                }
-                return SizedBox(
-                  height: 180,
-                  width: 180,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: artwork,
-                  ),
-                );
-              },
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            header(),
+            const SizedBox(
+              height: 40,
             ),
-            const SizedBox(height: 20),
-            Text(
-              metadata?[0] ?? 'Radio Streaming',
-              softWrap: false,
-              overflow: TextOverflow.fade,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            Text(
-              metadata?[1] ?? '',
-              softWrap: false,
-              overflow: TextOverflow.fade,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                isPlaying ? _radioPlayer.pause() : _radioPlayer.play();
-              },
-              child: Icon(
-                isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Text('Version. 1.0'),
+            content(),
+            buttonRadioPlay(),
+            const Spacer(),
+            footer(),
           ],
         ),
       ),
