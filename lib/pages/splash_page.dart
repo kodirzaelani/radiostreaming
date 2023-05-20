@@ -15,7 +15,7 @@ class _SplashPageState extends State<SplashPage> {
   startSplashScreen() async {
     var duration = const Duration(seconds: 5);
     return Timer(duration, () {
-      Navigator.pushNamed(context, '/sign-in');
+      Navigator.pushNamed(context, '/stream-radio');
     });
   }
 
@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                'assets/cover.png',
+                "assets/cover.png",
               ),
             ),
           ),

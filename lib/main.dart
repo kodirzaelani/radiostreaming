@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:radiosdk26/pages/radio_stream.dart';
+import 'package:radiosdk26/pages/splash_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const StreamRadioPage(),
+      // home: const StreamRadioPage(),
+      routes: {
+        '/': (context) => const SplashPage(),
+        '/stream-radio': (context) => const StreamRadioPage(),
+      },
     );
   }
 }
