@@ -30,16 +30,30 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       backgroundColor: backgroundColor1,
       body: Center(
-        child: Container(
-          width: 130,
-          height: 150,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                "assets/cover.png",
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 130,
+              height: 150,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/cover.png",
+                  ),
+                ),
               ),
             ),
-          ),
+            const SizedBox(height: 20),
+            const Text(
+              'Loading...',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+          ],
         ),
       ),
     );
