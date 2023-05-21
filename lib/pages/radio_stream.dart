@@ -50,7 +50,7 @@ class _StreamRadioPageState extends State<StreamRadioPage> {
             Text(
               'Radio Streaming',
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
             ),
